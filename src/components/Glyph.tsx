@@ -24,7 +24,7 @@ function Glyph() {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[10, 10, 64, 64]} />
+      <planeGeometry args={[2, 2, 64, 64]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={glyphVertexShader}
