@@ -1,20 +1,25 @@
 uniform float uTime;
+uniform float uSize;
+uniform vec2 uResolution;
+uniform float uFrequency;
+uniform float uAmplitude;
+uniform float uSpeed;
+
 varying vec2 vUv;
 
 void main() {
+  float speed = uTime * uSpeed;
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+  float elevation = sin((modelPosition.x + modelPosition.y + speed) * uFrequency) * (uAmplitude * 0.5);
+  elevation = smoothstep(-1.0, 1.0, elevation);
+  modelPosition.z += elevation;
 
-  float gridX = mod(uv.x * 30.0, 1.0);
-  gridX = 1.0 - step(0.95, gridX);
+  vec4 viewPosition = viewMatrix * modelPosition;
 
-  float gridY = mod(uv.y * 30.0, 1.0);
-  gridY = 1.0 - step(0.95, gridY);
-
-  // modelPosition.z += sin(uTime + (gridX * gridY) + vUv.x + vUv.y);
-  // modelPosition.x += sin(gridX);
-
-  gl_Position = projectionMatrix * viewMatrix * modelPosition;
+  gl_Position = projectionMatrix * viewPosition;
+  gl_PointSize = uSize * uResolution.y;
+  gl_PointSize *= 1.0 / -viewPosition.z;
 
   vUv = uv;
 }

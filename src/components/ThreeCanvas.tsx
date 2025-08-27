@@ -4,7 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 
 function ThreeCanvas() {
   return (
-    <Canvas camera={{ position: [0, 0, 2] }}>
+    <Canvas camera={{ position: [0, 0, 3] }}>
       <OrbitControls makeDefault />
       <ambientLight color="white" intensity={0.3} />
       <Glyph />
