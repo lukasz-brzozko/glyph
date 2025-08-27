@@ -7,12 +7,18 @@ uniform float uSpeed;
 
 varying vec2 vUv;
 
+float rand(vec2 co) {
+  return fract(sin(dot(co, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
 void main() {
+
   float speed = uTime * uSpeed;
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-  float elevation = sin((modelPosition.x + modelPosition.y + speed) * uFrequency) * (uAmplitude * 0.5);
-  elevation = smoothstep(-1.0, 1.0, elevation);
+  float randomValue = rand(modelPosition.xy);
+  float elevation = sin((modelPosition.x + modelPosition.y + speed) * uFrequency) * (uAmplitude + 0.5 * (randomValue));
+  elevation = smoothstep(0.5, 1.0, elevation);
   modelPosition.z += elevation;
 
   vec4 viewPosition = viewMatrix * modelPosition;
