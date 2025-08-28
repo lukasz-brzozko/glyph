@@ -1,6 +1,7 @@
-import { Canvas } from "@react-three/fiber";
-import Glyph from "./Glyph";
 import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+
+import Glyph from "./Glyph";
 
 function ThreeCanvas() {
   return (
