@@ -1,8 +1,10 @@
 ---
-import ThreeCanvas from "../components/ThreeCanvas";
-import Layout from "../layouts/Layout.astro";
+import FileButton from "@/components/FileButton";
+import ThreeCanvas from "@/components/ThreeCanvas";
+import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
   <ThreeCanvas client:load />
+  <FileButton client:load />
 </Layout>
