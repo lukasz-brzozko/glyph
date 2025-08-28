@@ -36,8 +36,22 @@ export default [
             },
           ],
           groups: ["unknown", "callback", "shorthand"],
-          order: "asc",
           type: "natural",
+          order: "asc",
+        },
+      ],
+      "perfectionist/sort-objects": [
+        "error",
+        {
+          customGroups: [
+            {
+              elementNamePattern: "^on*",
+              groupName: "callback",
+            },
+          ],
+          groups: ["property", "unknown", "method", "callback"],
+          type: "natural",
+          order: "asc",
         },
       ],
     },
