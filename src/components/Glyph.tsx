@@ -1,6 +1,7 @@
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import {
+  AdditiveBlending,
   DoubleSide,
   TextureLoader,
   Uniform,
@@ -25,10 +26,10 @@ function Glyph() {
     uTexture: new Uniform(glyphTexture),
     uTime: new Uniform(0),
     uResolution: new Uniform(new Vector2(size.width, size.height)),
-    uSize: new Uniform(0.03),
+    uSize: new Uniform(0.1),
     uPixelRatio: new Uniform(Math.min(window.devicePixelRatio, 2)),
-    uSpeed: new Uniform(1.0),
-    uAmplitude: new Uniform(1.0),
+    uSpeed: new Uniform(2.0),
+    uAmplitude: new Uniform(0.35),
     uFrequency: new Uniform(1.0),
   });
 
@@ -37,19 +38,10 @@ function Glyph() {
   }, [size]);
 
   useControls({
-    uSize: {
-      value: uniformsRef.current.uSize.value,
-      min: 0.02,
-      max: 1,
-      step: 0.01,
-      onChange: (newValue) => {
-        uniformsRef.current.uSize.value = newValue;
-      },
-    },
     uSpeed: {
       value: uniformsRef.current.uSpeed.value,
       min: 0,
-      max: 10,
+      max: 6,
       step: 0.01,
       onChange: (newValue) => {
         uniformsRef.current.uSpeed.value = newValue;
@@ -58,7 +50,7 @@ function Glyph() {
     uAmplitude: {
       value: uniformsRef.current.uAmplitude.value,
       min: 0,
-      max: 1.5,
+      max: 5,
       step: 0.01,
       onChange: (newValue) => {
         uniformsRef.current.uAmplitude.value = newValue;
@@ -67,7 +59,7 @@ function Glyph() {
     uFrequency: {
       value: uniformsRef.current.uFrequency.value,
       min: 0,
-      max: 5,
+      max: 3,
       step: 0.01,
       onChange: (newValue) => {
         uniformsRef.current.uFrequency.value = newValue;
@@ -85,13 +77,15 @@ function Glyph() {
 
   return (
     <points ref={meshRef}>
-      <planeGeometry args={[2, 2, 48, 48]} />
+      <planeGeometry args={[2, 2, 48, 48]} index={null} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={glyphVertexShader}
         fragmentShader={glyphFragmentShader}
         uniforms={uniformsRef.current}
         side={DoubleSide}
+        blending={AdditiveBlending}
+        depthWrite={false}
         transparent
       />
     </points>
