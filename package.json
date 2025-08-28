@@ -12,16 +12,23 @@
     "@astrojs/react": "^4.3.0",
     "@react-three/drei": "^10.7.3",
     "@react-three/fiber": "^9.3.0",
+    "@tailwindcss/vite": "^4.1.12",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "astro": "^5.13.2",
     "leva": "^0.10.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "tailwindcss": "^4.1.12",
     "three": "^0.179.1",
-    "vite-plugin-glsl": "^1.5.1"
+    "vite-plugin-glsl": "^1.5.1",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@types/three": "^0.179.0"
+    "@types/three": "^0.179.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "eslint": "^9.34.0",
+    "eslint-plugin-perfectionist": "^4.15.0"
   }
 }
