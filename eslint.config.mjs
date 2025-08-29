@@ -1,26 +1,19 @@
-import typescript from "@typescript-eslint/eslint-plugin";
-import typescriptParser from "@typescript-eslint/parser";
 import perfectionist from "eslint-plugin-perfectionist";
+import reactPlugin from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import tseslint from "typescript-eslint";
 
-export default [
+export default tseslint.config(
+  tseslint.configs.recommended,
+  reactHooks.configs["recommended-latest"],
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat["jsx-runtime"],
   {
-    files: ["**/*.ts*"],
-    languageOptions: {
-      parser: typescriptParser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        ecmaVersion: "latest",
-        sourceType: "module",
-      },
-    },
-    plugins: {
-      "@typescript-eslint": typescript,
-    },
+    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
     rules: {
-      ...typescript.configs["recommended"].rules,
+      "react/no-unknown-property": "off",
     },
+    settings: { react: { version: "detect" } },
   },
   {
     ...perfectionist.configs["recommended-natural"],
@@ -55,5 +48,5 @@ export default [
         },
       ],
     },
-  },
-];
+  }
+);
