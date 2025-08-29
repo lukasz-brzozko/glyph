@@ -93,6 +93,7 @@ function Glyph() {
 
       userTexture.image = event.target;
       userTexture.needsUpdate = true;
+      uniformsRef.current.uTexture.value = userTexture;
     };
 
     if (image) {
@@ -100,10 +101,6 @@ function Glyph() {
       imageEl = new Image();
       imageEl.addEventListener("load", onImageLoad);
       imageEl.src = imgUrl;
-
-      uniformsRef.current.uTexture.value = userTexture;
-    } else {
-      uniformsRef.current.uTexture.value = glyphTexture;
     }
 
     return () => {
