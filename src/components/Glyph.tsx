@@ -1,4 +1,5 @@
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
 import { useEffect, useRef } from "react";
 import {
@@ -6,7 +7,6 @@ import {
   DoubleSide,
   type Mesh,
   type ShaderMaterial,
-  TextureLoader,
   Uniform,
   Vector2,
 } from "three";
@@ -21,14 +21,8 @@ function Glyph() {
   const materialRef = useRef<null | ShaderMaterial>(null);
   const { gl, size } = useThree();
   // const glyphTexture = useLoader(TextureLoader, "birdy.webp");
-  const glyphTexture = useLoader(
-    TextureLoader,
-    "juz-nie-chce-urlopu-removebg-preview.png",
-  );
-  const userTexture = useLoader(
-    TextureLoader,
-    "juz-nie-chce-urlopu-removebg-preview.png",
-  );
+  const glyphTexture = useTexture("juz-nie-chce-urlopu-removebg-preview.png");
+  const userTexture = useTexture("juz-nie-chce-urlopu-removebg-preview.png");
 
   const uniformsRef = useRef({
     uAmplitude: new Uniform(0.35),
@@ -86,7 +80,6 @@ function Glyph() {
     let imgUrl: null | string = null;
 
     const onImageLoad = (event: Event) => {
-      console.log(event.target);
       userTexture.dispose();
       userTexture.image = event.target;
       userTexture.needsUpdate = true;
