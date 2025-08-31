@@ -1,12 +1,11 @@
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { useControls } from "leva";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import {
   AdditiveBlending,
   DoubleSide,
   type Mesh,
   type ShaderMaterial,
-  Texture,
   TextureLoader,
   Uniform,
   Vector2,
@@ -30,8 +29,6 @@ function Glyph() {
     TextureLoader,
     "juz-nie-chce-urlopu-removebg-preview.png",
   );
-  userTexture.repeat.set(1, 1);
-  // const [userTexture, setUserTexture] = useState<null | Texture>(null);
 
   const uniformsRef = useRef({
     uAmplitude: new Uniform(0.35),
@@ -90,7 +87,7 @@ function Glyph() {
 
     const onImageLoad = (event: Event) => {
       console.log(event.target);
-
+      userTexture.dispose();
       userTexture.image = event.target;
       userTexture.needsUpdate = true;
       uniformsRef.current.uTexture.value = userTexture;
