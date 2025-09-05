@@ -25,11 +25,15 @@ function Glyph() {
   const glyphTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
   const userTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
 
+  const pixelRatio = Math.min(window.devicePixelRatio, 2);
+
   const uniformsRef = useRef({
     uAmplitude: new Uniform(0.35),
     uFrequency: new Uniform(1.0),
-    uPixelRatio: new Uniform(Math.min(window.devicePixelRatio, 2)),
-    uResolution: new Uniform(new Vector2(size.width, size.height)),
+    uPixelRatio: new Uniform(pixelRatio),
+    uResolution: new Uniform(
+      new Vector2(size.width * pixelRatio, size.height * pixelRatio),
+    ),
     uSize: new Uniform(0.1),
     uSpeed: new Uniform(2.0),
     uTexture: new Uniform(glyphTexture),
@@ -65,7 +69,7 @@ function Glyph() {
       },
     },
   });
-  gl.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  gl.setPixelRatio(pixelRatio);
 
   useFrame((_state, delta) => {
     if (materialRef.current === null) return;
@@ -73,8 +77,11 @@ function Glyph() {
   });
 
   useEffect(() => {
-    uniformsRef.current.uResolution.value.set(size.width, size.height);
-  }, [size]);
+    uniformsRef.current.uResolution.value.set(
+      size.width * pixelRatio,
+      size.height * pixelRatio,
+    );
+  }, [size, pixelRatio]);
 
   useEffect(() => {
     let imageEl: HTMLImageElement | null = null;
