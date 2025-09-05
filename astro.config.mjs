@@ -7,7 +7,9 @@ import glsl from "vite-plugin-glsl";
 
 // https://astro.build/config
 export default defineConfig({
+  base: "/glyph",
   integrations: [react()],
+  site: "https://lukasz-brzozko.github.io",
   vite: {
     plugins: [glsl(), tailwindcss()],
     resolve: {
