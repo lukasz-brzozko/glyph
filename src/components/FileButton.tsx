@@ -32,7 +32,7 @@ function FileButton() {
     <>
       <button
         className={cn(
-          "absolute px-3 py-2 font-medium text-gray-300 uppercase transition-[outline-offset,opacity] transform -translate-y-1/2 rounded-md cursor-pointer focus:outline-4 active:opacity-90 outline-2 outline-gray-300 hover:outline-offset-3 right-16 file-button top-1/2",
+          "file-button absolute -translate-y-1/2 transform cursor-pointer rounded-md bg-black px-3 py-2 font-medium text-gray-300 uppercase outline-2 outline-gray-300 transition-[outline-offset,opacity] hover:outline-offset-3 focus:outline-4 active:opacity-90 max-lg:bottom-0 max-lg:left-1/2 max-lg:-translate-x-1/2 lg:top-1/2 lg:right-16",
           {
             invisible: !isVisible,
             visible: isVisible,
