@@ -15,14 +15,15 @@ import useStore from "@/redux/store";
 import glyphFragmentShader from "@/shaders/glyph/fragmentShader.glsl";
 import glyphVertexShader from "@/shaders/glyph/vertexShader.glsl";
 
+const BASE_TEXTURE_IMAGE_PATH = "/bird.webp";
+
 function Glyph() {
   const { image } = useStore();
   const meshRef = useRef<Mesh | null>(null);
   const materialRef = useRef<null | ShaderMaterial>(null);
   const { gl, size } = useThree();
-  // const glyphTexture = useLoader(TextureLoader, "birdy.webp");
-  const glyphTexture = useTexture("juz-nie-chce-urlopu-removebg-preview.png");
-  const userTexture = useTexture("juz-nie-chce-urlopu-removebg-preview.png");
+  const glyphTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
+  const userTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
 
   const uniformsRef = useRef({
     uAmplitude: new Uniform(0.35),
