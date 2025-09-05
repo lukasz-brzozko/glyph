@@ -15,7 +15,7 @@ import useStore from "@/redux/store";
 import glyphFragmentShader from "@/shaders/glyph/fragmentShader.glsl";
 import glyphVertexShader from "@/shaders/glyph/vertexShader.glsl";
 
-const BASE_TEXTURE_IMAGE_PATH = "/bird.webp";
+const BASE_TEXTURE_IMAGE_PATH = `${import.meta.env.BASE_URL}/bird.webp`;
 
 function Glyph() {
   const { image } = useStore();
