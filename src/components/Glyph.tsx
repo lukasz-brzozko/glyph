@@ -60,15 +60,6 @@ function Glyph() {
         uniformsRef.current.uAmplitude.value = newValue;
       },
     },
-    uFrequency: {
-      max: 3,
-      min: 0,
-      step: 0.01,
-      value: uniformsRef.current.uFrequency.value,
-      onChange: (newValue) => {
-        uniformsRef.current.uFrequency.value = newValue;
-      },
-    },
     uSize: {
       max: 0.13,
       min: 0.02,
@@ -79,7 +70,7 @@ function Glyph() {
       },
     },
     uSpeed: {
-      max: 2,
+      max: 1,
       min: 0,
       step: 0.01,
       value: uniformsRef.current.uSpeed.value,
