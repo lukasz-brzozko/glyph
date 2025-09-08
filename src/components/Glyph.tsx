@@ -137,10 +137,8 @@ function Glyph() {
         index={null}
       >
         <bufferAttribute
-          array={aRandomsArray}
+          args={[aRandomsArray, COUNT_PER_VERTEX]}
           attach="attributes-aRandom"
-          count={aRandomsArray.length / COUNT_PER_VERTEX}
-          itemSize={COUNT_PER_VERTEX}
         />
       </planeGeometry>
       <shaderMaterial
