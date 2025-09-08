@@ -15,7 +15,7 @@ import useStore from "@/redux/store";
 import glyphFragmentShader from "@/shaders/glyph/fragmentShader.glsl";
 import glyphVertexShader from "@/shaders/glyph/vertexShader.glsl";
 
-const BASE_TEXTURE_IMAGE_PATH = `${import.meta.env.BASE_URL}/bird.webp`;
+const BASE_TEXTURE_IMAGE_PATH = `${import.meta.env.BASE_URL}/batman.svg`;
 const GEOMETRY_SEGMENTS = 48;
 const COUNT_PER_VERTEX = 3; // x, y, z
 const vertexCount = (GEOMETRY_SEGMENTS + 1) * (GEOMETRY_SEGMENTS + 1);
@@ -39,12 +39,13 @@ function Glyph() {
 
   const uniformsRef = useRef({
     uAmplitude: new Uniform(0.35),
+    uBaseStability: new Uniform(3.0),
     uFrequency: new Uniform(1.0),
     uPixelRatio: new Uniform(pixelRatio),
     uResolution: new Uniform(
       new Vector2(size.width * pixelRatio, size.height * pixelRatio),
     ),
-    uSize: new Uniform(0.1),
+    uSize: new Uniform(0.13),
     uSpeed: new Uniform(0.5),
     uTexture: new Uniform(glyphTexture),
     uTime: new Uniform(0),
@@ -60,8 +61,17 @@ function Glyph() {
         uniformsRef.current.uAmplitude.value = newValue;
       },
     },
+    uBaseStability: {
+      max: 30,
+      min: 1,
+      step: 1,
+      value: uniformsRef.current.uBaseStability.value,
+      onChange: (newValue) => {
+        uniformsRef.current.uBaseStability.value = newValue;
+      },
+    },
     uSize: {
-      max: 0.13,
+      max: 0.2,
       min: 0.02,
       step: 0.01,
       value: uniformsRef.current.uSize.value,
