@@ -1,29 +1,26 @@
+attribute vec3 aRandom;
+
 uniform float uTime;
 uniform float uSize;
 uniform vec2 uResolution;
-uniform float uFrequency;
+// uniform float uFrequency;
 uniform float uAmplitude;
 uniform float uSpeed;
 
 varying vec2 vUv;
 
-#include "../utils/simplex4d.glsl"
+#include "../utils/simplexNoise2d.glsl"
 
 void main() {
-  float speed = uTime * uSpeed;
-
-  float offset1 = 1.0;
-  float offset2 = 2.0;
-  float offset3 = 3.0;
 
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-  float noiseX = (noise4d(vec4(modelPosition.xyz + offset1, uSpeed)));
-  float noiseY = (noise4d(vec4(modelPosition.xyz + offset2, uSpeed)));
-  float noiseZ = (noise4d(vec4(modelPosition.xyz + offset3, uSpeed)));
+  vec3 randomSignes = sign(aRandom);
+  vec3 randomValuesSquashed = pow(abs(aRandom), vec3(3.0));
+  float noise = smoothstep(-1.0, 1.0, snoise(vec2(modelPosition.x + uTime * uSpeed, modelPosition.y + uTime * uSpeed)));
 
-  modelPosition.x += sin((speed + offset1) * uFrequency * offset1) * noiseX * 0.1 * uAmplitude;
-  modelPosition.y += sin((speed + offset2) * uFrequency * offset2) * noiseY * 0.1 * uAmplitude;
-  modelPosition.z += sin((speed + offset3) * uFrequency * offset3) * noiseZ * 0.1 * uAmplitude;
+  vec3 modelPositionTransform = randomSignes * randomValuesSquashed * uAmplitude;
+
+  modelPosition.xyz += modelPositionTransform;
 
   vec4 viewPosition = viewMatrix * modelPosition;
 

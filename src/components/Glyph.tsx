@@ -16,6 +16,16 @@ import glyphFragmentShader from "@/shaders/glyph/fragmentShader.glsl";
 import glyphVertexShader from "@/shaders/glyph/vertexShader.glsl";
 
 const BASE_TEXTURE_IMAGE_PATH = `${import.meta.env.BASE_URL}/bird.webp`;
+const GEOMETRY_SEGMENTS = 48;
+const COUNT_PER_VERTEX = 3; // x, y, z
+const vertexCount = (GEOMETRY_SEGMENTS + 1) * (GEOMETRY_SEGMENTS + 1);
+
+const aRandomsArray = new Float32Array(
+  Array.from(
+    { length: vertexCount * COUNT_PER_VERTEX },
+    () => (Math.random() - 0.5) * 2.0,
+  ),
+);
 
 function Glyph() {
   const { image } = useStore();
@@ -35,7 +45,7 @@ function Glyph() {
       new Vector2(size.width * pixelRatio, size.height * pixelRatio),
     ),
     uSize: new Uniform(0.1),
-    uSpeed: new Uniform(2.0),
+    uSpeed: new Uniform(0.5),
     uTexture: new Uniform(glyphTexture),
     uTime: new Uniform(0),
   });
@@ -69,7 +79,7 @@ function Glyph() {
       },
     },
     uSpeed: {
-      max: 6,
+      max: 2,
       min: 0,
       step: 0.01,
       value: uniformsRef.current.uSpeed.value,
@@ -121,7 +131,17 @@ function Glyph() {
 
   return (
     <points ref={meshRef}>
-      <planeGeometry args={[2, 2, 48, 48]} index={null} />
+      <planeGeometry
+        args={[2, 2, GEOMETRY_SEGMENTS, GEOMETRY_SEGMENTS]}
+        index={null}
+      >
+        <bufferAttribute
+          array={aRandomsArray}
+          attach="attributes-aRandom"
+          count={aRandomsArray.length / COUNT_PER_VERTEX}
+          itemSize={COUNT_PER_VERTEX}
+        />
+      </planeGeometry>
       <shaderMaterial
         blending={AdditiveBlending}
         depthWrite={false}
