@@ -4,7 +4,7 @@ An interactive particle-based glyph renderer built with Astro, React, and Three.
 
 ## Demo
 
-<video src="public/demo.mp4" width="500" controls></video>
+<video src="https://github.com/user-attachments/assets/d443ce1e-f2dc-4fe8-8b43-2c0c16184e55" width="500" controls></video>
 
 ## Features
 
