@@ -84,7 +84,7 @@ function Glyph() {
       min: 0,
       step: 0.01,
       value: uniformsRef.current.uSpeed.value,
-      onChange: (newValue) => {
+      onEditEnd: (newValue) => {
         uniformsRef.current.uSpeed.value = newValue;
       },
     },
