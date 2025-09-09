@@ -58,8 +58,3 @@ npm run dev
 ## License
 
 MIT License. See `LICENSE` for details.
-
-Notes:
-
-- On GitHub, GIFs always render; HTML `<video>` usually works but may not autoplay. If it doesn’t render, upload the video via a GitHub Release or Issue to get an “asset” URL and use that in `src`.
-- Keep the video short (<10s) and small (<10MB) for fast loading.
