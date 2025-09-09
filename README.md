@@ -4,7 +4,7 @@ An interactive particle-based glyph renderer built with Astro, React, and Three.
 
 ## Demo
 
-<video src="public/demo.mp4" width="100%" controls muted playsinline></video>
+<video src="https://github.com/user-attachments/assets/d443ce1e-f2dc-4fe8-8b43-2c0c16184e55" width="500" controls></video>
 
 ## Features
 
@@ -58,8 +58,3 @@ npm run dev
 ## License
 
 MIT License. See `LICENSE` for details.
-
-Notes:
-
-- On GitHub, GIFs always render; HTML `<video>` usually works but may not autoplay. If it doesn’t render, upload the video via a GitHub Release or Issue to get an “asset” URL and use that in `src`.
-- Keep the video short (<10s) and small (<10MB) for fast loading.
