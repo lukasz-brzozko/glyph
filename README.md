@@ -1,46 +1,65 @@
-# Astro Starter Kit: Basics
+# Glyph
+
+An interactive particle-based glyph renderer built with Astro, React, and Three.js (via React Three Fiber). Upload an image and watch it transform into a dynamic, noise-driven point cloud rendered with custom GLSL shaders.
+
+## Demo
+
+<video src="public/demo.mp4" width="100%" controls muted playsinline></video>
+
+## Features
+
+- **Interactive upload**: Click “Use your image” to load your own `png/jpg/jpeg/webp` and render it as particles.
+- **Custom shaders**: Vertex and fragment shaders control particle motion, size, and blending with **additive** glow.
+- **Noise animation**: 2D simplex noise drives organic motion over time.
+- **Live controls (Leva)**: Tune uniforms at runtime:
+  - `uAmplitude`: displacement strength
+  - `uBaseStability`: how strongly random offsets are constrained
+  - `uSize`: particle size
+  - `uSpeed`: animation speed
+- **Responsive canvas** with pixel-ratio capping for performance.
+- **Orbit controls**: Pan/zoom/rotate the camera.
+
+## Tech Stack
+
+- **Astro** for site scaffolding and build
+- **React 19** + **React DOM**
+- **React Three Fiber** + **@react-three/drei**
+- **Three.js**
+- **GLSL shaders** (via `vite-plugin-glsl`)
+- **Zustand** for simple global state (uploaded image)
+- **Tailwind (v4)** utilities + `tailwind-merge`
+- **Leva** for UI controls
+- TypeScript, ESLint, Prettier
+
+## Getting Started
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- App runs at `http://localhost:4321`
+- Click “Use your image” to upload and render.
+- Adjust parameters using the Leva control panel.
 
-## 🚀 Project Structure
+## Scripts
 
-Inside of your Astro project, you'll see the following folders and files:
+- `npm run dev` – Start local dev server
+- `npm run build` – Build to `./dist/`
+- `npm run preview` – Preview production build
+- `npm run astro ...` – Run Astro CLI
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+## File Upload and Defaults
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- Upload supported types: `image/png, image/jpeg, image/jpg, image/webp`
+- All processing happens entirely in your browser. Your uploaded image is never sent to any server.
+- Images remain on your device; reloading or closing the tab clears them.
 
-## 🧞 Commands
+## License
 
-All commands are run from the root of the project, from a terminal:
+MIT License. See `LICENSE` for details.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Notes:
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- On GitHub, GIFs always render; HTML `<video>` usually works but may not autoplay. If it doesn’t render, upload the video via a GitHub Release or Issue to get an “asset” URL and use that in `src`.
+- Keep the video short (<10s) and small (<10MB) for fast loading.
