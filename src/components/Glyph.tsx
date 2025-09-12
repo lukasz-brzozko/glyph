@@ -35,7 +35,7 @@ function Glyph() {
   const glyphTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
   const userTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
 
-  const pixelRatio = Math.min(window.devicePixelRatio, 2);
+  const pixelRatio = gl.getPixelRatio();
 
   const uniformsRef = useRef({
     uAmplitude: new Uniform(0.35),
@@ -89,7 +89,6 @@ function Glyph() {
       },
     },
   });
-  gl.setPixelRatio(pixelRatio);
 
   useFrame((_state, delta) => {
     if (materialRef.current === null) return;

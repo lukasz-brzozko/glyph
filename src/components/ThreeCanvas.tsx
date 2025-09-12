@@ -5,7 +5,7 @@ import Glyph from "./Glyph";
 
 function ThreeCanvas() {
   return (
-    <Canvas camera={{ position: [0, 0, 3] }}>
+    <Canvas camera={{ position: [0, 0, 3] }} dpr={[1, 2]}>
       <OrbitControls makeDefault />
       <ambientLight color="white" intensity={0.3} />
       <Glyph />
