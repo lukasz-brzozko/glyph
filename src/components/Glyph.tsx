@@ -7,6 +7,7 @@ import {
   DoubleSide,
   type Mesh,
   type ShaderMaterial,
+  Texture,
   Uniform,
   Vector2,
 } from "three";
@@ -33,7 +34,6 @@ function Glyph() {
   const materialRef = useRef<null | ShaderMaterial>(null);
   const { gl, size } = useThree();
   const glyphTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
-  const userTexture = useTexture(BASE_TEXTURE_IMAGE_PATH);
 
   const pixelRatio = gl.getPixelRatio();
 
@@ -105,10 +105,11 @@ function Glyph() {
   useEffect(() => {
     let imageEl: HTMLImageElement | null = null;
     let imgUrl: null | string = null;
+    let userTexture: null | Texture = null;
 
     const onImageLoad = (event: Event) => {
-      userTexture.dispose();
-      userTexture.image = event.target;
+      const image = event.target as HTMLImageElement;
+      userTexture = new Texture(image);
       userTexture.needsUpdate = true;
       uniformsRef.current.uTexture.value = userTexture;
     };
@@ -127,7 +128,7 @@ function Glyph() {
       imgUrl = null;
       imageEl = null;
     };
-  }, [image, glyphTexture, userTexture]);
+  }, [image, glyphTexture]);
 
   return (
     <points ref={meshRef}>
